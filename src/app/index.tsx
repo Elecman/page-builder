@@ -11,7 +11,7 @@ export const App = () => {
   const items: TabsProps['items'] = [
     {
       key: '1',
-      label: 'Tab 1',
+      label: 'Tab 2',
       children: <Editor resolver={Components}>
         <Layout style={{height: '100vh'}}>
           <Topbar />
