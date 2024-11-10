@@ -8,5 +8,5 @@ export default defineConfig({
       jsxImportSource: '@emotion/react'
     })
   ],
-  base: '/page-builder'
+  base: '/page-builder/'
 });
