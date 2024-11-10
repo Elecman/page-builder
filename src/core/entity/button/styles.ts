@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import type {IUnionStyledComponent} from '../interfaces';
 
 export const StyledButton = styled(Button)<IUnionStyledComponent>(
-  (props) => ({}),
   ({$margin}) => ({
     marginTop: $margin ? `${$margin[0]}` : 0,
     marginRight: $margin ? `${$margin[1]}` : 0,

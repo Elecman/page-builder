@@ -1,4 +1,4 @@
-import {Col, Layout, Row, Space, theme, Typography} from 'antd';
+import {Col, Layout, Row, theme, Typography} from 'antd';
 
 import {Entity} from '../../core/entity';
 import {RenderItem} from './RenderItem';

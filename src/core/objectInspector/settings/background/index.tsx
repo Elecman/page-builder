@@ -13,7 +13,7 @@ export const BackgroundSettings = ({key}:ISettingsComponent) => {
     propValue: node.data.custom.style,
   }));
   const handleChangeBackground = useCallback((value: string) => {
-    setCustom(((props) => {
+    setCustom(((props: any) => {
       props['style']['background'] = value;
     }), 500);
   }, [setCustom]);
