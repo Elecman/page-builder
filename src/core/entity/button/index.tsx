@@ -1,44 +1,72 @@
 import type {ButtonProps} from 'antd/es/button/button.js';
-import {useNode, type UserComponent} from '@craftjs/core';
+import {Element, type Node, type NodeHelpersType, useNode, type UserComponent} from '@craftjs/core';
 import {ButtonSettings} from './settings';
 import {StyledButton} from './styles.ts';
+import {Caption} from '../caption';
 
 const defaultProps = {
   padding: ['8px', '8px', '8px', '8px'],
   margin: ['0px', '0px', '0px', '0px'],
   // background: { r: 255, g: 255, b: 255, a: 1 },
   background: 'linear-gradient(90deg, rgb(38,150,231) 0%, rgb(135,208,104) 100%)',
-  color: { r: 0, g: 0, b: 0, a: 1 },
+  color: {r: 0, g: 0, b: 0, a: 1},
+};
+
+export const CaptionGroup: UserComponent = ({children, ...props}) => {
+  const {
+    connectors: {connect},
+  } = useNode();
+  return (
+    <div ref={connect} className="w-full mt-5" {...props}>
+      {children}
+    </div>
+  );
+};
+
+CaptionGroup.craft = {
+  rules: {
+    canMoveOut(canMoveOut: Node[], self: Node, helpers: NodeHelpersType): boolean {
+      return false;
+    },
+    canDrag(node: Node, helpers: NodeHelpersType): boolean {
+      return false;
+    }
+  },
 };
 
 export const Button: UserComponent<ButtonProps> = (props) => {
-  const {customProps, connectors: {connect, drag}} = useNode((node) => ({
-    selected: node.events.selected,
-    customProps: node.data.custom.style
+  const {customStyles, connectors: {connect, drag}} = useNode((node) => ({
+    customStyles: node.data.custom.style
   }));
   return (
     <StyledButton
-      $margin={customProps?.margin}
-      $padding={customProps?.padding}
-      $background={customProps?.background}
+      $marginTop={customStyles?.marginTop}
+      $marginRight={customStyles?.marginRight}
+      $marginBottom={customStyles?.marginBottom}
+      $marginLeft={customStyles?.marginLeft}
+      $paddingTop={customStyles?.paddingTop}
+      $paddingRight={customStyles?.paddingRight}
+      $paddingBottom={customStyles?.paddingBottom}
+      $paddingLeft={customStyles?.paddingLeft}
+      $background={customStyles?.background}
       ref={(ref) => {
         if (ref) {
           connect(drag(ref));
         }
       }}
-      {...props}
-    />
+    >
+      <Element is={CaptionGroup} canvas id="CaptionGroup">
+        <Caption />
+      </Element>
+    </StyledButton>
   );
 };
 
 Button.craft = {
-  props: {
-    children: 'Button',
-  },
   custom: {
     style: {
       ...defaultProps
-    }
+    },
   },
   related: {
     toolbar: ButtonSettings

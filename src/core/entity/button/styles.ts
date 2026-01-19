@@ -3,19 +3,22 @@ import styled from 'styled-components';
 import type {IUnionStyledComponent} from '../interfaces';
 
 export const StyledButton = styled(Button)<IUnionStyledComponent>(
-  ({$margin}) => ({
-    marginTop: $margin ? `${$margin[0]}` : 0,
-    marginRight: $margin ? `${$margin[1]}` : 0,
-    marginBottom: $margin ? `${$margin[2]}` : 0,
-    marginLeft: $margin ? `${$margin[3]}` : 0,
+  ({$marginTop, $marginRight, $marginBottom, $marginLeft,}) => ({
+    marginTop: $marginTop ? $marginTop : undefined,
+    marginRight: $marginRight ? $marginRight : undefined,
+    marginBottom: $marginBottom ? $marginBottom : undefined,
+    marginLeft: $marginLeft ? $marginLeft : undefined,
   }),
-  ({$padding}) => ({
-    paddingTop: $padding && `${$padding[0]}`,
-    paddingRight: $padding && `${$padding[1]}`,
-    paddingBottom: $padding && `${$padding[2]}`,
-    paddingLeft: $padding && `${$padding[3]}`,
+  ({$paddingTop, $paddingRight, $paddingBottom, $paddingLeft,}) => ({
+    paddingTop: $paddingTop ? $paddingTop : undefined,
+    paddingRight: $paddingRight ? $paddingRight : undefined,
+    paddingBottom: $paddingBottom ? $paddingBottom : undefined,
+    paddingLeft: $paddingLeft ? $paddingLeft : undefined,
   }),
   ({$background}) => ({
     background: $background
+  }),
+  ({style}) => ({
+    width: style?.width
   })
 );
